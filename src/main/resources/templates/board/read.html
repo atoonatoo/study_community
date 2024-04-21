@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta charset="UTF-8">
+    <title>Read</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td class="col1"></span>글번호</td>
+                <td class="col2">
+                    <div id="boardId" th:text="${board.boardId}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col1"></span>글제목</td>
+                <td class="col2">
+                    <div th:text="${board.boardTitle}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col1"></span>글내용</td>
+                <td class="col2">
+                    <div th:text="${board.boardContent}"></div>
+                </td>
+            </tr>
+        </table>
+    <div>
+</body>
+</html>
