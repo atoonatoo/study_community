@@ -1,92 +1,51 @@
 package study.community.demo.board.controller;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import study.community.demo.board.entity.Board;
-import study.community.demo.board.repository.BoardRepository;
+import study.community.demo.board.service.BoardService;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@Controller
+@RequiredArgsConstructor
 @RequestMapping("/board")
+@Controller
 public class BoardController {
 
-    private final BoardRepository boardRepository;
 
-    public BoardController(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
-    }
-
+    private final BoardService boardService;
 
     //메인 화면
-
     @GetMapping("/")
     public String index() {
         return "home";
     }
 
+
+    //게시판 글쓰기 화면 보기
     @GetMapping("/write")
-    public ModelAndView GetBoardWrite() {
+    public ModelAndView postCreationView() {
         return new ModelAndView("/board/write");
     }
 
-    //글쓰기
-    @PostMapping("/write")
-    public ModelAndView BoardWrite(Board board) {
-        Board boardData = boardRepository.save(board);
-        Optional<Board> by = boardRepository.findById(boardData.getBoardId());
 
-        return new ModelAndView("redirect:/board/list")
-                .addObject("boardTitle", boardData.getBoardTitle())
-                .addObject("boardContent", boardData.getBoardContent());
-    }
-
-
+    //게시판 조회
     @GetMapping("/list")
-    public List<Board> BoardList() {
-        List<Board> ListFindAll = boardRepository.findAll();
-        return ListFindAll;
+    public List<Board> postList() {
+        return boardService.postList();
     }
 
-
+    //글 읽기
     @GetMapping("/read/{id}")
-    public ResponseEntity<Board> BoardRead(@PathVariable Long id) {
-        Optional<Board> board = boardRepository.findById(id);
+    public ResponseEntity<Board> PostReading(@PathVariable Long id) {
+        Optional<Board> board = boardService.findBoardById(id);
+
         return board.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-
-//    @GetMapping("/write")
-//    public String writeGet(){
-//        return "write";
-//    }
-//
-//    @PostMapping("/write")
-//    public String writePost(Board board){
-//        boardService.boardWrite(board);
-//        return "redirect:/board/list";
-//    }
-
-
-//    @GetMapping("/list")
-//    public List<Board> BoardList() {
-//        return boardRepository.findAll();
-//    }
-
-//    @PostMapping("/write")
-//    public String BoardWrite(Board board) {
-//        Board boardData = boardRepository.save(board);
-//        Optional<Board> by = boardRepository.findById(boardData.getBoardId());
-//
-//        Long testNo = boardData.getBoardId();
-//        System.out.println(testNo);
-//        return "글번호 : " + boardData.getBoardId();
-//    }
-
 
 }
