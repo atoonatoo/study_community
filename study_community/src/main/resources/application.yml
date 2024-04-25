@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name:
+      study_community
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study_community?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: at0123
+
+  servlet:
+    multipart:
+      max-request-size: 5MB
+      max-file-size: 1MB
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: none
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
