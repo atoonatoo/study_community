@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      style="overflow-x: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <title>Write</title>
+</head>
+<body>
+    <div class="main">
+        <form action="/board/write" method="POST">
+            <table>
+                <tr>
+                    <td class="col1">제목</td>
+                    <td class="col2">
+                        <textarea name="boardTitle" id="boardTitle" cols="80" rows="1" placeholder=""></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1">내용</td>
+                    <td class="col2">
+                        <textarea name="boardContent" id="boardContent" cols="80" rows="5" placeholder=""></textarea>
+                    </td>
+                </tr>
+            </table>
+            <span id="writeBtn">
+                  <input type="hidden" id="token">
+                  <button class="btn btn-outline-dark">작성</button>
+            </span>
+        </form>
+    </div>
+</body>
+</html>
