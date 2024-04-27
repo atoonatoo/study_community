@@ -2,6 +2,7 @@ package study.community.demo.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,11 +18,13 @@ public class BoardControllerPost {
 
     //글쓰기
     @PostMapping("/write")
-    public ModelAndView postCreation(Board board) {
+    public ModelAndView postCreation(@ModelAttribute("board") Board board) {
+        String title = board.getBoardTitle();
+        String content = board.getBoardContent();
         boardService.postCreation(board);
         return new ModelAndView("redirect:/board/list")
-                .addObject("boardTitle", board.getBoardTitle())
-                .addObject("boardContent", board.getBoardContent());
+                .addObject("boardTitle", title)
+                .addObject("boardContent", content);
     }
 
 

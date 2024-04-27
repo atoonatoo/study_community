@@ -4,15 +4,10 @@ import jakarta.persistence.Column;
 
 public class WriteDto {
 
-
-    public static class BoardWrite {
-        private Long boardId;
-        @Column(nullable = false, length = 25)
-        private String boardTitle;
-        @Column(nullable = false, length = 300)
-        private String boardContent;
-
-    }
-
+    private Long boardId;
+    @Column(nullable = false, length = 25)
+    private String boardTitle;
+    @Column(nullable = false, length = 300)
+    private String boardContent;
 
 }

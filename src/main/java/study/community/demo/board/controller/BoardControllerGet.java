@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import study.community.demo.board.entity.Board;
 import study.community.demo.board.service.BoardService;
-
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RequestMapping("/board")
 @Controller
-public class BoardController {
+public class BoardControllerGet {
 
 
     private final BoardService boardService;
@@ -43,9 +41,10 @@ public class BoardController {
     //글 읽기
     @GetMapping("/read/{id}")
     public ResponseEntity<Board> PostReading(@PathVariable Long id) {
-        Optional<Board> board = boardService.findBoardById(id);
-
-        return board.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Board board = boardService.findBoardById(id);
+        return ResponseEntity.ok().body(board);
     }
+
+
 
 }
